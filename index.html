@@ -1,0 +1,54 @@
+<script src="vendor/fabric.js"></script>
+<script src="vendor/fabric.utils.js"></script>
+<script src="vendor/fabric.SVGText.js"></script>
+
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+<style>
+@font-face {
+    font-family: 'loveloblack';
+    src: url('assets/lovelo-webfontkit/lovelo_black-webfont.eot');
+    src: url('assets/lovelo-webfontkit/lovelo_black-webfont.eot?#iefix') format('embedded-opentype'),
+         url('assets/lovelo-webfontkit/lovelo_black-webfont.woff') format('woff'),
+         url('assets/lovelo-webfontkit/lovelo_black-webfont.ttf') format('truetype'),
+         url('assets/lovelo-webfontkit/lovelo_black-webfont.svg#loveloblack') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+</style>
+<script src="src/itext-to-paths.js"></script>
+
+
+<body>
+  <canvas id="c"></canvas>
+</body>
+
+<script>
+  var canvas = new fabric.Canvas('c', {width:1000,height:1000});
+
+  var text = new fabric.IText('Mmas\n   dfakr', {
+    left: 100,
+    top: 100,
+    fontFamily:'Lato',
+    fontWeight:700,
+    fontSize:81,
+    opacity : 0.25,
+    fill : '#442222'
+  });
+
+  canvas.add(text)
+
+  function addSvgText(){
+    iTextToGroupOfPaths(text, function(d){
+      console.log(d);
+      canvas.add(d)
+      canvas.setActiveObject(text)
+    })
+  }
+  setTimeout(function(){
+    canvas.renderAll();
+    addSvgText();
+
+  }, 1000)
+</script>
+
+
